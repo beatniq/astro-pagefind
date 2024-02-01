@@ -1,6 +1,6 @@
 {
-  "name": "astro-pagefind",
-  "version": "0.0.0-development",
+  "name": "@beatniq/astro-pagefind",
+  "version": "1.0.0",
   "description": "Astro integration for Pagefind static site search",
   "type": "module",
   "main": "./src/index.ts",
@@ -22,9 +22,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/shishkin/astro-pagefind.git"
+    "url": "ssh://git@github.com/beatniq/astro-pagefind.git",
+    "directory": "packages/astro-pagefind"
   },
-  "homepage": "https://github.com/shishkin/astro-pagefind",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "homepage": "https://github.com/beatniq/astro-pagefind",
   "keywords": [
     "astro",
     "astro-component",
@@ -34,10 +38,10 @@
     "search",
     "ui"
   ],
-  "author": "Sergey Shishkin <sergey@shishkin.org>",
+  "author": "Colin Watts <beatniq@me.com>",
   "license": "MIT",
   "peerDependencies": {
-    "astro": "^2.0.4 || ^3.0.0 || ^4.0.0"
+    "astro": "^4.0.0"
   },
   "devDependencies": {
     "@astrojs/check": "0.4.1",
