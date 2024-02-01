@@ -2,28 +2,27 @@
   "name": "root",
   "private": true,
   "workspaces": [
-    "packages/example",
     "packages/astro-pagefind"
   ],
   "scripts": {
-    "dev": "npm run dev --workspace=example",
+    "dev": "npm run dev --workspace=astro-pagefind",
     "lint": "eslint --ext .ts,.js,.astro .",
     "build": "npm run build --workspaces --if-present",
     "release": "npm run release --workspace=astro-pagefind",
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@commitlint/cli": "18.4.4",
-    "@commitlint/config-conventional": "18.4.4",
+    "@commitlint/cli": "18.6.0",
+    "@commitlint/config-conventional": "18.6.0",
     "@types/eslint": "8.56.2",
     "@types/prettier": "2.7.3",
-    "@typescript-eslint/eslint-plugin": "6.19.0",
-    "@typescript-eslint/parser": "6.19.0",
+    "@typescript-eslint/eslint-plugin": "6.20.0",
+    "@typescript-eslint/parser": "6.20.0",
     "eslint": "8.56.0",
     "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-astro": "0.31.3",
+    "eslint-plugin-astro": "0.31.4",
     "eslint-plugin-prettier": "5.1.3",
-    "husky": "8.0.3",
+    "husky": "9.0.10",
     "prettier": "3.2.4",
     "prettier-plugin-astro": "0.13.0"
   },

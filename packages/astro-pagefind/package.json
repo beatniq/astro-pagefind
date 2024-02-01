@@ -41,17 +41,17 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.4.1",
-    "@astrojs/markdown-remark": "4.1.0",
+    "@astrojs/markdown-remark": "4.2.1",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/git": "10.0.1",
     "@types/semantic-release": "20.0.6",
-    "astro": "4.2.1",
+    "astro": "4.3.0",
     "semantic-release": "23.0.0",
     "typescript": "5.3.3"
   },
   "dependencies": {
-    "@pagefind/default-ui": "^1.0.3",
-    "pagefind": "^1.0.3",
-    "sirv": "^2.0.3"
+    "@pagefind/default-ui": "^1.0.4",
+    "pagefind": "^1.0.4",
+    "sirv": "^2.0.4"
   }
 }
