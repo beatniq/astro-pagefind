@@ -1,5 +1,4 @@
 ---
-//import "@pagefind/default-ui/css/ui.css";
 import {JsonStringify} from "../jsonFunction.ts";
 export interface Props {
   readonly id?: string;
@@ -29,7 +28,6 @@ const bundlePath = `${import.meta.env.BASE_URL}pagefind/`;
     for (const el of document.querySelectorAll(`${allSelector}.pagefind-init`)) {
       const elSelector = [
         ...(el.id ? [`#${el.id}`] : []),
-        ...[...el.classList.values()].map((c) => `.${c}`),
         allSelector,
       ].join("");
       const bundlePath = el.getAttribute("data-bundle-path");
