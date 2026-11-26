@@ -51,6 +51,31 @@ import Search from "astro-pagefind/components/Search";
 
 See [Main.layout](./src/layouts/Main.astro) for a usage example.
 
+### Function Options
+
+`uiOptions` are written into the page as JSON, so they can't hold functions such as `processResult` or
+`processTerm` (the build fails if they do). Register those from a client-side script instead, using the
+component's `id`. Nothing is evaluated from a string, so this works under a Content Security Policy without
+`'unsafe-eval'`.
+
+```astro
+---
+import Search from "@beatniq/astro-pagefind/components/Search";
+---
+
+<Search id="search" uiOptions={{ showImages: false }} />
+
+<script>
+  import { setUiOptions } from "@beatniq/astro-pagefind/client";
+
+  setUiOptions("search", {
+    processTerm: (term) => (term.length < 3 ? "" : term),
+  });
+</script>
+```
+
+Register them at the top level of the script, so they are in place before the search UI starts.
+
 ### Pre-filled Search Query
 
 In SSR mode Astro provides access to URL query parameters which can be used to pre-fill search query via a prop:

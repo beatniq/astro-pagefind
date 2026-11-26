@@ -1,5 +1,4 @@
 ---
-import {JsonStringify} from "../jsonFunction.ts";
 export interface Props {
   readonly id?: string;
   readonly className?: string;
@@ -9,6 +8,19 @@ export interface Props {
 
 const {id, className, query, uiOptions = {}} = Astro.props;
 const bundlePath = `${import.meta.env.BASE_URL}pagefind/`;
+
+// uiOptions are written into the page as JSON, and JSON.stringify drops functions without a word, so fail
+// the build instead and point to the client-side alternative.
+const unserialisable = Object.entries(uiOptions)
+  .filter(([, value]) => typeof value === "function" || value instanceof RegExp)
+  .map(([key]) => key);
+if (unserialisable.length > 0) {
+  throw new Error(
+    `<Search> uiOptions ${unserialisable.join(", ")} cannot be written to HTML. ` +
+      `Register them from a client-side script instead: ` +
+      `setUiOptions("${id ?? "<id>"}", {...}) from "@beatniq/astro-pagefind/client".`,
+  );
+}
 ---
 <div
   id={id}
@@ -16,12 +28,12 @@ const bundlePath = `${import.meta.env.BASE_URL}pagefind/`;
   data-pagefind-ui
   data-bundle-path={bundlePath}
   data-query={query}
-  data-ui-options={JsonStringify(uiOptions)}
+  data-ui-options={JSON.stringify(uiOptions)}
 >
 </div>
 <script>
   import {PagefindUI} from "@pagefind/default-ui";
-  import {JsonParse} from "../jsonFunction.ts";
+  import {getUiOptions} from "../client.ts";
 
   function initPageFind() {
     const allSelector = "[data-pagefind-ui]";
@@ -31,9 +43,10 @@ const bundlePath = `${import.meta.env.BASE_URL}pagefind/`;
         allSelector,
       ].join("");
       const bundlePath = el.getAttribute("data-bundle-path");
-      const opts = JsonParse(el.getAttribute("data-ui-options") ?? "{}", true);
+      const opts = JSON.parse(el.getAttribute("data-ui-options") ?? "{}");
       new PagefindUI({
         ...opts,
+        ...(el.id ? getUiOptions(el.id) : undefined),
         element: elSelector,
         bundlePath,
       });
